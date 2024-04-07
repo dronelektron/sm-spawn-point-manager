@@ -26,3 +26,7 @@ public void OnPluginStart() {
     SpawnPointList_Create();
     AutoExecConfig(AUTO_CREATE_YES, "spawn-point-manager");
 }
+
+public void OnMapStart() {
+    UseCase_ClearSpawnPointLists();
+}
