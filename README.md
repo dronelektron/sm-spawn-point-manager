@@ -16,3 +16,4 @@ Allows you to perform various actions with spawn points:
 ### Console Variables
 
 * sm_spawnpointmanager_shuffling - Enable (1) or disable (0) spawn points shuffling [default: "1"]
+* sm_spawnpointmanager_shuffling_pause - Pause (in seconds) after shuffling [default: "1"]

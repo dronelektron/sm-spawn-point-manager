@@ -1,3 +1,5 @@
+static int g_lastShuffleTime;
+
 static char g_spawnPointClassName[][] = {
     "info_player_allies",
     "info_player_axis"
@@ -25,10 +27,23 @@ static bool FindSpawnPoint(int& entity, int list) {
 }
 
 void UseCase_ShuffleSpawnPoints() {
-    if (Variable_Shuffling()) {
+    if (Variable_Shuffling() && IsShufflingReady()) {
         ShuffleSpawnPoints(LIST_ALLIES);
         ShuffleSpawnPoints(LIST_AXIS);
     }
+}
+
+static bool IsShufflingReady() {
+    int shuffleTime = GetTime();
+    int secondsPassed = shuffleTime - g_lastShuffleTime;
+
+    if (secondsPassed < Variable_ShufflingPause()) {
+        return false;
+    }
+
+    g_lastShuffleTime = shuffleTime;
+
+    return true;
 }
 
 static void ShuffleSpawnPoints(int list) {
