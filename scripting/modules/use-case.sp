@@ -5,6 +5,11 @@ static char g_spawnPointClassName[][] = {
     "info_player_axis"
 };
 
+void UseCase_ClearSpawnPointLists() {
+    SpawnPointList_Clear(LIST_ALLIES);
+    SpawnPointList_Clear(LIST_AXIS);
+}
+
 void UseCase_FindSpawnPoints() {
     FindSpawnPoints(LIST_ALLIES);
     FindSpawnPoints(LIST_AXIS);
