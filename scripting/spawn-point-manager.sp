@@ -29,4 +29,5 @@ public void OnPluginStart() {
 
 public void OnMapStart() {
     UseCase_ClearSpawnPointLists();
+    UseCase_FindSpawnPoints();
 }
