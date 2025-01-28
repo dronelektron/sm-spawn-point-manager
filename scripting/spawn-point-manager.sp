@@ -10,8 +10,6 @@
 #include "modules/spawn-point-list.sp"
 #include "modules/use-case.sp"
 
-#define AUTO_CREATE_YES true
-
 public Plugin myinfo = {
     name = "Spawn point manager",
     author = "Dron-elektron",
@@ -24,7 +22,7 @@ public void OnPluginStart() {
     Variable_Create();
     Event_Create();
     SpawnPointList_Create();
-    AutoExecConfig(AUTO_CREATE_YES, "spawn-point-manager");
+    AutoExecConfig(_, "spawn-point-manager");
 }
 
 public void OnMapStart() {
