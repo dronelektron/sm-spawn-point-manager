@@ -6,8 +6,8 @@ static char g_spawnPointClassName[][] = {
 };
 
 void UseCase_FindSpawnPoints() {
-    FindSpawnPoints(LIST_ALLIES);
-    FindSpawnPoints(LIST_AXIS);
+    FindSpawnPoints(List_Allies);
+    FindSpawnPoints(List_Axis);
 }
 
 static void FindSpawnPoints(int list) {
@@ -28,8 +28,8 @@ static bool FindSpawnPoint(int& entity, int list) {
 
 void UseCase_ShuffleSpawnPoints() {
     if (Variable_Shuffling() && IsShufflingReady()) {
-        ShuffleSpawnPoints(LIST_ALLIES);
-        ShuffleSpawnPoints(LIST_AXIS);
+        ShuffleSpawnPoints(List_Allies);
+        ShuffleSpawnPoints(List_Axis);
     }
 }
 

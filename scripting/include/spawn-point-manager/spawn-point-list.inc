@@ -3,5 +3,9 @@
 #endif
 #define _spawn_point_manager_spawn_point_list_included
 
-#define LIST_ALLIES 0
-#define LIST_AXIS 1
+enum {
+    List_Allies,
+    List_Axis
+};
+
+#define LISTS_AMOUNT (List_Axis + 1)

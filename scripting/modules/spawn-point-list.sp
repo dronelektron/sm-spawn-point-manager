@@ -1,8 +1,8 @@
-static ArrayList g_entities[LIST_AXIS + 1];
+static ArrayList g_entities[LISTS_AMOUNT];
 
 void SpawnPointList_Create() {
-    g_entities[LIST_ALLIES] = new ArrayList();
-    g_entities[LIST_AXIS] = new ArrayList();
+    g_entities[List_Allies] = new ArrayList();
+    g_entities[List_Axis] = new ArrayList();
 }
 
 void SpawnPointList_Clear(int list) {
