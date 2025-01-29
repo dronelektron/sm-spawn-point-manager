@@ -2,12 +2,14 @@
 #include <sdktools>
 
 #include "spawn-point-manager/spawn-point-list"
+#include "spawn-point-manager/timer"
 #include "spawn-point-manager/use-case"
 
-#include "modules/console-variable.sp"
 #include "modules/entity.sp"
 #include "modules/event.sp"
 #include "modules/spawn-point-list.sp"
+#include "modules/spawn-point-pool.sp"
+#include "modules/timer.sp"
 #include "modules/use-case.sp"
 
 public Plugin myinfo = {
@@ -19,12 +21,13 @@ public Plugin myinfo = {
 };
 
 public void OnPluginStart() {
-    Variable_Create();
     Event_Create();
     SpawnPointList_Create();
-    AutoExecConfig(_, "spawn-point-manager");
+    SpawnPointPool_Create();
 }
 
 public void OnMapStart() {
+    Timer_Reset(List_Allies);
+    Timer_Reset(List_Axis);
     UseCase_FindSpawnPoints();
 }
