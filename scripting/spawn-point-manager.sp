@@ -2,14 +2,12 @@
 #include <sdktools>
 
 #include "spawn-point-manager/spawn-point-list"
-#include "spawn-point-manager/timer"
 #include "spawn-point-manager/use-case"
 
 #include "modules/entity.sp"
 #include "modules/event.sp"
 #include "modules/spawn-point-list.sp"
 #include "modules/spawn-point-pool.sp"
-#include "modules/timer.sp"
 #include "modules/use-case.sp"
 
 public Plugin myinfo = {
@@ -27,7 +25,6 @@ public void OnPluginStart() {
 }
 
 public void OnMapStart() {
-    Timer_Reset(List_Allies);
-    Timer_Reset(List_Axis);
+    UseCase_ResetLastSpawnTime();
     UseCase_FindSpawnPoints();
 }

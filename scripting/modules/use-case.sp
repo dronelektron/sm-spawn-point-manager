@@ -1,7 +1,13 @@
+static float g_lastSpawnTime = 0.0;
+
 static char g_spawnPointClassName[][] = {
     "info_player_allies",
     "info_player_axis"
 };
+
+void UseCase_ResetLastSpawnTime() {
+    g_lastSpawnTime = 0.0;
+}
 
 void UseCase_FindSpawnPoints() {
     FindSpawnPoints(List_Allies);
@@ -38,13 +44,27 @@ void UseCase_SelectRandomSpawnPoint(int client) {
     }
 
     int list = team - TEAM_ALLIES;
+
+    UpdateSpawnPointPool(list);
+
     int entity = GetRandomSpawnPoint(client, list);
 
     if (entity > INDEX_NOT_FOUND) {
         TeleportPlayerToSpawnPoint(client, entity);
     }
+}
 
-    Timer_ResetSpawnPointPool(list);
+static void UpdateSpawnPointPool(int list) {
+    float currentTime = GetGameTime();
+    float secondsPassed = currentTime - g_lastSpawnTime;
+
+    if (secondsPassed < SPAWN_POINT_POOL_DELAY) {
+        return;
+    }
+
+    g_lastSpawnTime = currentTime;
+
+    SpawnPointPool_ResetCurrentIndex(list);
 }
 
 static int GetRandomSpawnPoint(int client, int list) {
