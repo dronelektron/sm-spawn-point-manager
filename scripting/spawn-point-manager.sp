@@ -4,6 +4,7 @@
 #include "spawn-point-manager/spawn-point-list"
 #include "spawn-point-manager/use-case"
 
+#include "modules/console-variable.sp"
 #include "modules/entity.sp"
 #include "modules/event.sp"
 #include "modules/spawn-point-list.sp"
@@ -19,9 +20,11 @@ public Plugin myinfo = {
 };
 
 public void OnPluginStart() {
+    Variable_Create();
     Event_Create();
     SpawnPointList_Create();
     SpawnPointPool_Create();
+    AutoExecConfig(_, "spawn-point-manager");
 }
 
 public void OnMapStart() {

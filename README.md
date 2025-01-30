@@ -16,3 +16,7 @@ Allows you to perform various actions with spawn points:
 
 * Download latest [release](https://github.com/dronelektron/spawn-point-manager/releases)
 * Extract `plugins` folder to `addons/sourcemod` folder of your server
+
+### Console Variables
+
+* sm_spawnpointmanager_randomization - Randomization of spawn points [default: "1"]

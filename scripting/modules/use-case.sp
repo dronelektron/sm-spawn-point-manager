@@ -39,7 +39,7 @@ static bool FindSpawnPoint(int& entity, int list) {
 void UseCase_SelectRandomSpawnPoint(int client) {
     int team = GetClientTeam(client);
 
-    if (team < TEAM_ALLIES) {
+    if (team < TEAM_ALLIES || !Variable_Randomization()) {
         return;
     }
 
