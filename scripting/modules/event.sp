@@ -3,5 +3,8 @@ void Event_Create() {
 }
 
 public void Event_PlayerSpawn(Event event, const char[] name, bool dontBroadcast) {
-    UseCase_ShuffleSpawnPoints();
+    int userId = event.GetInt("userid");
+    int client = GetClientOfUserId(userId);
+
+    UseCase_SelectRandomSpawnPoint(client);
 }
