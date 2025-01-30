@@ -2,7 +2,7 @@
 
 Allows you to perform various actions with spawn points:
 
-* Teleport the player to a random spawn point
+* Randomize spawn points
 
 ### Supported Games
 
