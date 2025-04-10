@@ -4,6 +4,9 @@ Allows you to perform various actions with spawn points:
 
 * Randomize spawn points
 
+> [!CAUTION]
+> This plugin can crash your server or greatly affect performance
+
 ### Supported Games
 
 * Day of Defeat: Source
