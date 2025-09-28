@@ -1,4 +1,7 @@
 #include <sourcemod>
+#include <dhooks>
+
+#include "modules/detour.sp"
 
 public Plugin myinfo = {
     name = "Spawn point manager",
@@ -7,3 +10,7 @@ public Plugin myinfo = {
     version = "0.2.0",
     url = "https://github.com/dronelektron/spawn-point-manager"
 };
+
+public void OnPluginStart() {
+    Detour_Create();
+}
