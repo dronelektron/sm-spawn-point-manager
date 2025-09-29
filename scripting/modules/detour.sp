@@ -28,7 +28,8 @@ static void SelectSpawnSpot_Create(GameData gameData) {
 }
 
 static MRESReturn OnSelectSpawnSpot(int client, DHookParam params) {
-    int lastSpawnIndex = UseCase_GetRandomSpawnIndex(client);
+    int team = GetClientTeam(client);
+    int lastSpawnIndex = SpawnPointPool_GetRandomIndex(team);
 
     params.SetObjectVar(2, 0, ObjectValueType_Int, lastSpawnIndex);
 

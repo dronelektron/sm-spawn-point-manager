@@ -4,6 +4,7 @@
 #include "spawn-point-manager/client"
 
 #include "modules/detour.sp"
+#include "modules/spawn-point-pool.sp"
 #include "modules/use-case.sp"
 
 public Plugin myinfo = {
@@ -16,8 +17,9 @@ public Plugin myinfo = {
 
 public void OnPluginStart() {
     Detour_Create();
+    SpawnPointPool_Create();
 }
 
 public void OnMapStart() {
-    UseCase_CountSpawnPoints();
+    UseCase_InitSpawnPointPools();
 }
