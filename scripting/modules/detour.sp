@@ -22,15 +22,15 @@ static void SelectSpawnSpot_Create(GameData gameData) {
     detour.SetFromConf(gameData, SDKConf_Signature, "CDODPlayer::SelectSpawnSpot");
     detour.AddParam(HookParamType_ObjectPtr); // spawnPoints
     detour.AddParam(HookParamType_ObjectPtr); // lastSpawnIndex
-    detour.Enable(Hook_Post, OnSelectSpawnSpot);
+    detour.Enable(Hook_Pre, OnSelectSpawnSpot);
 
     delete detour;
 }
 
 static MRESReturn OnSelectSpawnSpot(int client, DHookParam params) {
-    int lastSpawnIndex = params.GetObjectVar(2, 0, ObjectValueType_Int);
+    int lastSpawnIndex = UseCase_GetRandomSpawnIndex(client);
 
-    PrintToServer("[DEBUG] OnSelectSpawnSpot: player %N, last spawn index %d", client, lastSpawnIndex);
+    params.SetObjectVar(2, 0, ObjectValueType_Int, lastSpawnIndex);
 
-    return MRES_Ignored;
+    return MRES_ChangedHandled;
 }

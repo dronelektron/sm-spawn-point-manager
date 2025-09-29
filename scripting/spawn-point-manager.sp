@@ -1,7 +1,10 @@
 #include <sourcemod>
 #include <dhooks>
 
+#include "spawn-point-manager/client"
+
 #include "modules/detour.sp"
+#include "modules/use-case.sp"
 
 public Plugin myinfo = {
     name = "Spawn point manager",
@@ -13,4 +16,8 @@ public Plugin myinfo = {
 
 public void OnPluginStart() {
     Detour_Create();
+}
+
+public void OnMapStart() {
+    UseCase_CountSpawnPoints();
 }
