@@ -1,13 +1,10 @@
 #include <sourcemod>
-#include <sdktools>
+#include <dhooks>
 
-#include "spawn-point-manager/spawn-point-list"
-#include "spawn-point-manager/use-case"
+#include "spawn-point-manager/client"
 
 #include "modules/console-variable.sp"
-#include "modules/entity.sp"
-#include "modules/event.sp"
-#include "modules/spawn-point-list.sp"
+#include "modules/detour.sp"
 #include "modules/spawn-point-pool.sp"
 #include "modules/use-case.sp"
 
@@ -15,19 +12,21 @@ public Plugin myinfo = {
     name = "Spawn point manager",
     author = "Dron-elektron",
     description = "Allows you to perform various actions with spawn points",
-    version = "0.2.0",
+    version = "0.3.0",
     url = "https://github.com/dronelektron/spawn-point-manager"
 };
 
 public void OnPluginStart() {
     Variable_Create();
-    Event_Create();
-    SpawnPointList_Create();
+    Detour_Create();
     SpawnPointPool_Create();
     AutoExecConfig(_, "spawn-point-manager");
 }
 
 public void OnMapStart() {
-    UseCase_ResetLastSpawnTime();
-    UseCase_FindSpawnPoints();
+    UseCase_InitSpawnPointPools();
+}
+
+public void OnConfigsExecuted() {
+    Detour_SelectSpawnSpot_CheckConfig();
 }

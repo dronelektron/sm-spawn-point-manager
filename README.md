@@ -2,10 +2,7 @@
 
 Allows you to perform various actions with spawn points:
 
-* Randomize spawn points
-
-> [!CAUTION]
-> This plugin can crash your server or greatly affect performance
+* Shuffle
 
 ### Supported Games
 
@@ -13,13 +10,13 @@ Allows you to perform various actions with spawn points:
 
 ### Requirements
 
-* [SourceMod](https://www.sourcemod.net) 1.11 or later
+* [SourceMod](https://www.sourcemod.net) 1.12 or later
 
 ### Installation
 
 * Download latest [release](https://github.com/dronelektron/spawn-point-manager/releases)
-* Extract `plugins` folder to `addons/sourcemod` folder of your server
+* Extract `gamedata` and `plugins` folder to `addons/sourcemod` folder of your server
 
-### Console Variables
+### Console Variable
 
-* sm_spawnpointmanager_randomization - Randomization of spawn points [default: "1"]
+* sm_spawnpointmanager_shuffling - Shuffle spawn points [default: "1"]

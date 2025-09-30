@@ -1,9 +1,14 @@
-static ConVar g_randomization;
+static ConVar g_shuffling;
 
 void Variable_Create() {
-    g_randomization = CreateConVar("sm_spawnpointmanager_randomization", "1", "Randomization of spawn points");
+    g_shuffling = CreateConVar("sm_spawnpointmanager_shuffling", "1", "Shuffle spawn points");
+    g_shuffling.AddChangeHook(OnShuffling);
 }
 
-bool Variable_Randomization() {
-    return g_randomization.BoolValue;
+bool Variable_Shuffling() {
+    return g_shuffling.BoolValue;
+}
+
+static void OnShuffling(ConVar variable, const char[] oldValue, const char[] newValue) {
+    Detour_SelectSpawnSpot_CheckConfig();
 }

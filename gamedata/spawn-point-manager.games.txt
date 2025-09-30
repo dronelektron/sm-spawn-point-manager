@@ -1,0 +1,15 @@
+"Games"
+{
+    "dod"
+    {
+        "Signatures"
+        {
+            "CDODPlayer::SelectSpawnSpot"
+            {
+                "library"   "server"
+                "windows"   "\x55\x8B\xEC\x83\xEC\x6C\x53\x56\x8B\x75"
+                "linux"     "@_ZN10CDODPlayer15SelectSpawnSpotEP10CUtlVectorI7CHandleI11CBaseEntityE10CUtlMemoryIS3_iEERi"
+            }
+        }
+    }
+}
