@@ -3,6 +3,7 @@
 
 #include "spawn-point-manager/client"
 
+#include "modules/console-variable.sp"
 #include "modules/detour.sp"
 #include "modules/spawn-point-pool.sp"
 #include "modules/use-case.sp"
@@ -16,10 +17,16 @@ public Plugin myinfo = {
 };
 
 public void OnPluginStart() {
+    Variable_Create();
     Detour_Create();
     SpawnPointPool_Create();
+    AutoExecConfig(_, "spawn-point-manager");
 }
 
 public void OnMapStart() {
     UseCase_InitSpawnPointPools();
+}
+
+public void OnConfigsExecuted() {
+    Detour_SelectSpawnSpot_CheckConfig();
 }

@@ -1,9 +1,32 @@
+static DynamicDetour g_shufflingDetour;
+static bool g_shufflingEnabled;
+
 void Detour_Create() {
     GameData gameData = OpenGameData("spawn-point-manager.games");
 
     SelectSpawnSpot_Create(gameData);
 
     delete gameData;
+}
+
+void Detour_SelectSpawnSpot_CheckConfig() {
+    bool enabled = Variable_Shuffling();
+
+    Detour_SelectSpawnSpot_Toggle(enabled);
+}
+
+void Detour_SelectSpawnSpot_Toggle(bool enabled) {
+    if (g_shufflingEnabled == enabled) {
+        return;
+    }
+
+    g_shufflingEnabled = enabled;
+
+    if (enabled) {
+        g_shufflingDetour.Enable(Hook_Pre, OnSelectSpawnSpot);
+    } else {
+        g_shufflingDetour.Disable(Hook_Pre, OnSelectSpawnSpot);
+    }
 }
 
 static GameData OpenGameData(const char[] name) {
@@ -17,14 +40,10 @@ static GameData OpenGameData(const char[] name) {
 }
 
 static void SelectSpawnSpot_Create(GameData gameData) {
-    DynamicDetour detour = DHookCreateDetour(Address_Null, CallConv_THISCALL, ReturnType_Void, ThisPointer_CBaseEntity);
-
-    detour.SetFromConf(gameData, SDKConf_Signature, "CDODPlayer::SelectSpawnSpot");
-    detour.AddParam(HookParamType_ObjectPtr); // spawnPoints
-    detour.AddParam(HookParamType_ObjectPtr); // lastSpawnIndex
-    detour.Enable(Hook_Pre, OnSelectSpawnSpot);
-
-    delete detour;
+    g_shufflingDetour = DHookCreateDetour(Address_Null, CallConv_THISCALL, ReturnType_Void, ThisPointer_CBaseEntity);
+    g_shufflingDetour.SetFromConf(gameData, SDKConf_Signature, "CDODPlayer::SelectSpawnSpot");
+    g_shufflingDetour.AddParam(HookParamType_ObjectPtr); // spawnPoints
+    g_shufflingDetour.AddParam(HookParamType_ObjectPtr); // lastSpawnIndex
 }
 
 static MRESReturn OnSelectSpawnSpot(int client, DHookParam params) {
