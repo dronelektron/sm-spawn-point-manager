@@ -21,12 +21,9 @@ public void OnPluginStart() {
     Detour_Create();
     SpawnPointPool_Create();
     AutoExecConfig(_, "spawn-point-manager");
+    Detour_SelectSpawnSpot_CheckConfig();
 }
 
 public void OnMapStart() {
     UseCase_InitSpawnPointPools();
-}
-
-public void OnConfigsExecuted() {
-    Detour_SelectSpawnSpot_CheckConfig();
 }
