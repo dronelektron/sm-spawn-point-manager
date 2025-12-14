@@ -16,20 +16,19 @@ void SpawnPointPool_Init(int team, int spawnAmount) {
 }
 
 int SpawnPointPool_GetRandomIndex(int team) {
-    int amount = g_indices[team].Length;
-    int current = g_currentIndex[team];
+    return GetRandomIndex(g_indices[team], g_currentIndex[team]);
+}
 
-    if (current == amount - 1) {
-        g_currentIndex[team] = 0;
+static int GetRandomIndex(ArrayList indices, int& current) {
+    int pivot = GetRandomInt(current, indices.Length - 1);
+    int index = indices.Get(pivot);
 
-        return g_indices[team].Get(current);
+    indices.SwapAt(current, pivot);
+    current++;
+
+    if (current == indices.Length) {
+        current = 0;
     }
-
-    int pivot = GetRandomInt(current + 1, amount - 1);
-    int index = g_indices[team].Get(pivot);
-
-    g_indices[team].SwapAt(current, pivot);
-    g_currentIndex[team]++;
 
     return index;
 }
